@@ -1,20 +1,12 @@
 <?php
 /**
- * RB Thumbnail Columns
- * @package 		  WordPress
- * @subpackage 		  RB Free Plugin
- * @author            Bashir Rased
- * @copyright         2022 Bashir Rased
- * @license           GPL-2.0-or-later
- *
- * @wordpress-plugin
  * Plugin Name:       RB Thumbnail Columns
  * Plugin URI:        https://github.com/BashirRased/wp-plugin-rb-thumbnail-columns
  * Description:       RB Thumbnail Columns plugin use for your posts visit count.
  * Version:           1.0.0
- * Requires at least: 5.9
- * Tested up to:      5.9
- * Requires PHP:      5.6
+ * Requires at least: 5.0
+ * Tested up to: 6.2
+ * Requires PHP: 7.1
  * Author:            Bashir Rased
  * Author URI:        https://profiles.wordpress.org/bashirrased2017/
  * Text Domain:       rb-thumbnail-columns

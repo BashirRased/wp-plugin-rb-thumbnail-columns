@@ -1,9 +1,9 @@
 === RB Thumbnail Columns ===
 Contributors: bashirrased
 Tags: rb, rb-thumbnail-columns
-Requires at least: 5.9
-Tested up to: 5.9
-Requires PHP: 5.6
+Requires at least: 5.0
+Tested up to: 6.2
+Requires PHP: 7.1
 Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 RB Thumbnail Columns plugin use for your posts visit count.
 
 == Description ==
-RB Post View Columns is a modern and easy to change plugin. With this plugin you can easily see the most visiting posts of any type of post types.
+RB Thumbnail Columns is show your post thumbnail column.
 
 == Installation ==
 
