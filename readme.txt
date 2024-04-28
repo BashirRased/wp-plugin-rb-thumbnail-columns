@@ -1,7 +1,7 @@
 === RB Thumbnail Columns ===
 Contributors: bashirrased2017
 Donate link: https://bashirrased.com/
-Tags: thumbnail columns, rb thumbnail columns
+Tags: rb thumbnail columns
 Requires at least: 6.4
 Tested up to: 6.5
 Requires PHP: 7.0
@@ -25,7 +25,7 @@ Plugins > Add New
 for "RB Thumbnail Columns"
 
 = Install and Activate =
-RB Thumbnail Columns from your Plugins page
+"RB Thumbnail Columns" from your Plugins page
 
 = Go to =
 Appearance -> Widgets -> Widgets List: Widgets Category -> RB Thumbnail Columns
