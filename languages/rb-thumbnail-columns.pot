@@ -1,0 +1,57 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: RB Thumbnail Columns\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-23 13:38+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: \n"
+"Language: \n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.8.0; wp-6.8.3; php-8.2.27\n"
+"X-Domain: rb-thumbnail-columns"
+
+#. Description of the plugin
+msgid "Adds a thumbnail column to post lists."
+msgstr "পোস্ট তালিকায় একটি থাম্বনেইল কলাম যোগ করা হয়েছে।"
+
+#: rb-thumbnail-columns.php:97
+msgid "All Posts"
+msgstr "সব পোস্ট"
+
+#. Author of the plugin
+msgid "Bashir Rased"
+msgstr "বশির রাশেদ"
+
+#: rb-thumbnail-columns.php:43
+msgid "Fork on Github"
+msgstr "গিটহাব থেকে ডাউনলোড করুন"
+
+#. Author URI of the plugin
+msgid "https://bashir-rased.com/"
+msgstr "https://bashir-rased.com/"
+
+#. URI of the plugin
+msgid "https://github.com/BashirRased/wp-plugin-rb-thumbnail-columns"
+msgstr "https://github.com/BashirRased/wp-plugin-rb-thumbnail-columns"
+
+#: rb-thumbnail-columns.php:99
+msgid "No Thumbnail Posts"
+msgstr "এই পোস্টে কোন থাম্বনেইল নেই।"
+
+#. Name of the plugin
+msgid "RB Thumbnail Columns"
+msgstr "আর বি থাম্বনেইল কলাম"
+
+#: rb-thumbnail-columns.php:56
+msgid "Thumbnail Image"
+msgstr "থাম্বনেইল ইমেজ"
+
+#: rb-thumbnail-columns.php:98
+msgid "Thumbnail Posts"
+msgstr "থাম্বনেইল পোস্টগুলো"

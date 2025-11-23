@@ -2,124 +2,156 @@
 /**
  * Plugin Name:       RB Thumbnail Columns
  * Plugin URI:        https://github.com/BashirRased/wp-plugin-rb-thumbnail-columns
- * Description:       RB Thumbnail Columns plugin use for your posts visit count.
- * Version:           1.0.0
+ * Description:       Adds a thumbnail column to post lists.
+ * Version:           1.0.1
  * Requires at least: 6.4
- * Tested up to: 6.5
- * Requires PHP: 7.0
+ * Tested up to:      6.7
+ * Requires PHP:      7.4
+ * PHP Version:       8.2
  * Author:            Bashir Rased
- * Author URI:        https://profiles.wordpress.org/bashirrased2017/
+ * Author URI:        https://bashir-rased.com/
  * Text Domain:       rb-thumbnail-columns
- * Domain Path: 	  /languages
- * License:           GPL v2 or later
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * 
+ * Domain Path:       /languages
+ *
+ * @package RB_Plugins
+ * @subpackage RB_Thumbnail_Columns
  */
 
-
-// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Plugin Text domain loaded
+/**
+ * Load plugin textdomain.
+ */
 function rbtc_textdomain() {
-    load_plugin_textdomain('rb-thumbnail-columns', false, dirname(plugin_basename(__FILE__)).'/languages'); 
+	load_plugin_textdomain( 'rb-thumbnail-columns', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
-add_action('plugins_loaded', 'rbtc_textdomain');
+add_action( 'plugins_loaded', 'rbtc_textdomain' );
 
-// Github Page Link
-add_filter('plugin_row_meta', function ($links, $plugin) {
-	if (plugin_basename(__FILE__) == $plugin) {
-		$link = sprintf("<a href='%s' style='color:#b32d2e;'>%s</a>", esc_url('https://github.com/BashirRased/wp-plugin-rb-thumbnail-columns'), __('Fork on Github', 'rb-thumbnail-columns'));
-		array_push($links, $link);
+/**
+ * Add GitHub link under plugin row.
+ *
+ * @param array  $links  Existing plugin links.
+ * @param string $plugin Plugin file name.
+ */
+function rbtc_plugin_row_meta( $links, $plugin ) {
+	if ( plugin_basename( __FILE__ ) === $plugin ) {
+		$links[] = sprintf(
+			'<a href="%s" style="color:#b32d2e;">%s</a>',
+			esc_url( 'https://github.com/BashirRased/wp-plugin-rb-thumbnail-columns' ),
+			esc_html__( 'Fork on Github', 'rb-thumbnail-columns' )
+		);
 	}
 	return $links;
-}, 10, 2);
-
-// Add Post Columns
-function rbtc_add_custom_columns( $columns ) {    
-   $columns['thumbnail']  = __('Thumbnail Image','rb-thumbnail-columns');    
-   return $columns;
 }
-add_filter('manage_post_posts_columns', 'rbtc_add_custom_columns', 20, 1);
-add_filter('manage_page_posts_columns', 'rbtc_add_custom_columns', 10, 1);
-add_filter('manage_product_posts_columns', 'rbtc_add_custom_columns', 20, 1);
+add_filter( 'plugin_row_meta', 'rbtc_plugin_row_meta', 10, 2 );
 
+/**
+ * Add thumbnail column to posts, pages, products.
+ *
+ * @param array $columns Existing columns.
+ */
+function rbtc_add_custom_columns( $columns ) {
+	$columns['thumbnail'] = esc_html__( 'Thumbnail Image', 'rb-thumbnail-columns' );
+	return $columns;
+}
+add_filter( 'manage_post_posts_columns', 'rbtc_add_custom_columns', 20 );
+add_filter( 'manage_page_posts_columns', 'rbtc_add_custom_columns', 10 );
+add_filter( 'manage_product_posts_columns', 'rbtc_add_custom_columns', 20 );
 
-// Add Post Columns Value
+/**
+ * Render thumbnail value in column.
+ *
+ * @param string $column  Column name.
+ * @param int    $post_id Post ID.
+ */
 function rbtc_custom_columns_value( $column, $post_id ) {
-   if ($column == 'thumbnail'){
-
-	$thumbnail = get_the_post_thumbnail( get_the_ID(), array( 100, 100 ) );
-
-    echo wp_kses_post($thumbnail); 
-   }
+	if ( 'thumbnail' === $column ) {
+		$thumbnail = get_the_post_thumbnail( $post_id, array( 100, 100 ) );
+		echo wp_kses_post( $thumbnail );
+	}
 }
-add_action('manage_posts_custom_column' , 'rbtc_custom_columns_value', 10, 2);
-add_action('manage_pages_custom_column' , 'rbtc_custom_columns_value', 10, 2);
+add_action( 'manage_posts_custom_column', 'rbtc_custom_columns_value', 10, 2 );
+add_action( 'manage_pages_custom_column', 'rbtc_custom_columns_value', 10, 2 );
 
-// Add Custom Post Columns Sortable
+/**
+ * Make thumbnail column sortable.
+ *
+ * @param array $columns Existing sortable columns.
+ */
 function rbtc_sortable_column( $columns ) {
 	$columns['thumbnail'] = '_thumbnail_id';
 	return $columns;
 }
-add_filter('manage_edit-post_sortable_columns', 'rbtc_sortable_column');
+add_filter( 'manage_edit-post_sortable_columns', 'rbtc_sortable_column' );
 
-// Add Custom Post Columns Filter
+/**
+ * Add dropdown filter for thumbnail posts.
+ */
 function rbtc_filter_column() {
-	
-	$filter_value = isset( $_GET['rbtc'] ) ? absint($_GET['rbtc']) : '';
-	$values       = array(
-		'0' => __('All Posts', 'rb-thumbnail-columns'),
-		'1' => __('Thumbnail Posts', 'rb-thumbnail-columns'),
-		'2' => __('No Thumbnail Posts', 'rb-thumbnail-columns'),
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$filter_value = isset( $_GET['rbtc'] ) ? absint( wp_unslash( $_GET['rbtc'] ) ) : 0;
+
+	$values = array(
+		'0' => esc_html__( 'All Posts', 'rb-thumbnail-columns' ),
+		'1' => esc_html__( 'Thumbnail Posts', 'rb-thumbnail-columns' ),
+		'2' => esc_html__( 'No Thumbnail Posts', 'rb-thumbnail-columns' ),
 	);
 	?>
-    <select name="<?php echo esc_attr('rbtc'); ?>">
-		<?php
-		foreach ( $values as $key => $value ) {
-			printf( 
-				"<option value='%s' %s>%s</option>", 
-				esc_attr($key),
-				$key == $filter_value ? "selected = 'selected'" : '',
-				esc_html($value, 'rb-thumbnail-columns')
-			);
-		}
-		?>
-    </select>
+	<select name="rbtc">
+		<?php foreach ( $values as $key => $label ) : ?>
+			<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $filter_value, $key ); ?>>
+				<?php echo esc_html( $label ); ?>
+			</option>
+		<?php endforeach; ?>
+	</select>
 	<?php
 }
-add_action('restrict_manage_posts', 'rbtc_filter_column');
+add_action( 'restrict_manage_posts', 'rbtc_filter_column' );
 
-// Add Custom Post Columns Filter Value
-function rbtc_filter_data($rbtc_query) {
-	if(!is_admin()){
+/**
+ * Apply filter/sorting to WP_Query.
+ *
+ * @param WP_Query $query The query object.
+ */
+function rbtc_filter_data( $query ) {
+
+	if ( ! is_admin() || ! $query->is_main_query() ) {
 		return;
 	}
-	$filter_value = isset( $_GET['rbtc'] ) ? absint($_GET['rbtc']) : '';
 
-	if ( '1' == $filter_value ) {
-		$rbtc_query->set( 'meta_query', array(
+	// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+	$filter_value = isset( $_GET['rbtc'] ) ? absint( wp_unslash( $_GET['rbtc'] ) ) : 0;
+
+	// Thumbnail filters.
+	if ( 1 === $filter_value ) {
+		$query->set(
+			'meta_query',
 			array(
-				'key'     => '_thumbnail_id',
-				'compare' => 'EXISTS'
+				array(
+					'key'     => '_thumbnail_id',
+					'compare' => 'EXISTS',
+				),
 			)
-		) );
-	} else if ( '2' == $filter_value ) {
-		$rbtc_query->set( 'meta_query', array(
+		);
+	} elseif ( 2 === $filter_value ) {
+		$query->set(
+			'meta_query',
 			array(
-				'key'     => '_thumbnail_id',
-				'compare' => 'NOT EXISTS'
+				array(
+					'key'     => '_thumbnail_id',
+					'compare' => 'NOT EXISTS',
+				),
 			)
-		) );
+		);
 	}
 
-	$rbtc_orderby = $rbtc_query->get('orderby');
-	if('rbtc_post_view' === $rbtc_orderby){
-		$rbtc_query->set('meta_key','rbtc_post_view');
-		$rbtc_query->set('orberby','meta_value_num');
+	// Fix sorting.
+	$orderby = $query->get( 'orderby' );
+	if ( 'rbtc_post_view' === $orderby ) {
+		$query->set( 'meta_key', 'rbtc_post_view' );
+		$query->set( 'orderby', 'meta_value_num' );
 	}
-
 }
-add_action('pre_get_posts', 'rbtc_filter_data');
+add_action( 'pre_get_posts', 'rbtc_filter_data' );

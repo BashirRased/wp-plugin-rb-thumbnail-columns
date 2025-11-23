@@ -1,0 +1,56 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: RB Thumbnail Columns\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-23 13:38+0000\n"
+"PO-Revision-Date: 2025-11-23 19:40+0600\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+"X-Loco-Version: 2.8.0; wp-6.8.3; php-8.2.27\n"
+"X-Domain: rb-thumbnail-columns\n"
+
+#. Description of the plugin
+msgid "Adds a thumbnail column to post lists."
+msgstr "Adds a thumbnail column to post lists."
+
+#: rb-thumbnail-columns.php:97
+msgid "All Posts"
+msgstr "All Posts"
+
+#. Author of the plugin
+msgid "Bashir Rased"
+msgstr "Bashir Rased"
+
+#: rb-thumbnail-columns.php:43
+msgid "Fork on Github"
+msgstr "Fork on Github"
+
+#. Author URI of the plugin
+msgid "https://bashir-rased.com/"
+msgstr "https://bashir-rased.com/"
+
+#. URI of the plugin
+msgid "https://github.com/BashirRased/wp-plugin-rb-thumbnail-columns"
+msgstr "https://github.com/BashirRased/wp-plugin-rb-thumbnail-columns"
+
+#: rb-thumbnail-columns.php:99
+msgid "No Thumbnail Posts"
+msgstr "No Thumbnail Posts"
+
+#. Name of the plugin
+msgid "RB Thumbnail Columns"
+msgstr "RB Thumbnail Columns"
+
+#: rb-thumbnail-columns.php:56
+msgid "Thumbnail Image"
+msgstr "Thumbnail Image"
+
+#: rb-thumbnail-columns.php:98
+msgid "Thumbnail Posts"
+msgstr "Thumbnail Posts"
